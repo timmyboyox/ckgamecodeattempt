@@ -1,0 +1,187 @@
+1. Game Overview
+
+1.1. Game Title
+1.2. High-Concept Pitch
+1.3. Genre & Tone
+1.4. Target Audience
+1.5. Platform & Tech Stack
+2. Story & Setting
+
+2.1. Lore Summary: world history, factions, major events
+2.2. Player Role & Motivation
+2.3. Factions & NPC Organizations
+2.4. Key Locations (villages, kingdoms, wilds)
+2.5. Progression of Narrative (acts, chapters, dynamic world events)
+3. Core Gameplay Mechanics
+
+3.1. Player Stats & Progression
+
+    Health, Gold, XP, Level
+
+    Skill trees or talent systems
+
+    Equipment and inventory slots
+
+3.2. Companions System
+
+    Hiring, naming, classes, leveling
+
+    Companion abilities & roles
+
+    Dismissal, reassignment, loyalty mechanics
+
+3.3. Quest & Reputation System
+
+    Quest Givers (map-based NPCs)
+
+    Quest types: small tasks vs. multi-stage story arcs
+
+    Reputation per faction, rep effects & thresholds
+
+    Unlockable perks (shops, elite quests)
+
+3.4. World Map & Movement
+
+    Grid dimensions (e.g. 100×100 tiles)
+
+    Terrain types & movement costs
+
+    A* pathfinding, ETA calculations
+
+    AI patrols & factions moving on the map
+
+    Viewport: panning, zoom, fog of war
+
+3.5. Combat Model
+
+    Instant small skirmishes: single-roll outcomes
+
+    Multi-wave battles: timed simulation + detailed log
+
+    Troop types & equipment modifiers on rolls
+
+    Morale, formation, special abilities (future expansions)
+
+3.6. Economy & Crafting
+
+    Resource types (gold, food, wood, iron, stone)
+
+    Shops, trading posts, merchant caravans
+
+    Crafting recipes & station mechanics
+
+3.7. Diplomacy & Politics
+
+    Alliances, war declarations, treaties
+
+    Vassal management, council roles (inspired by Crusader Kings)
+
+    Dynamic faction relationships & region control
+
+3.8. Dynamic Events
+
+    Random encounters (merchant, monsters, bandits)
+
+    Timed events (seasonal, festivals, invasions)
+
+    World-state shifts (plague, rebellion, natural disasters)
+
+4. User Interface & UX
+
+4.1. HUD Layout
+
+    Stats panel, reputation bar, minimap/viewport
+
+    Notification & popup system
+    4.2. Navigation & Tabs
+
+    Home, Quests, Inventory, Companions, Map, Guild, Tavern
+    4.3. Map Interaction
+
+    Hover tooltips, click-to-select, drag-to-pan
+
+    Grid overlay style & opacity
+    4.4. Menus & Dialogs
+
+    Quest screens, combat screens, shop dialogs
+
+    Confirmation modals (accept/complete quest, hire/dismiss companion)
+    4.5. Visual Style Guide
+
+    Color palettes per terrain & UI theme
+
+    Font choices, iconography, button styles
+
+    Animation guidelines (buttons, troops, world events)
+
+5. Art & Audio
+
+5.1. Tile Art
+
+    Sizes (32×32 px base, scaled as needed)
+
+    Terrain sheets (snow, grass, water, desert, mountain)
+
+    Grid overlay styling
+    5.2. Entity Sprites
+
+    Armies, bandit camps, castles, quest-giver NPCs
+
+    Player avatar and companions
+
+    Animation frames for movement/combat
+    5.3. UI Assets
+
+    Buttons, panels, icons, cursors, tooltips
+    5.4. Audio
+
+    Ambient loops (tavern, battlefield, wilderness)
+
+    SFX (button clicks, combat hits, notifications)
+
+    Music tracks (menu, map exploration, battle theme)
+
+6. Technical Architecture
+
+6.1. Client
+
+    HTML/CSS/JS or framework (React/Vue/etc.)
+
+    Canvas vs. DOM rendering for map
+
+    State management (in-memory vs. Redux-like)
+    6.2. Server & Persistence
+
+    RESTful API endpoints (movement, quests, rep, combat)
+
+    Data storage: JSON files vs. database (Mongo/Postgres)
+
+    Session/authentication (if multiplayer)
+    6.3. Networking (multiplayer or backend calls)
+
+    Fetch patterns, error handling, state sync
+    6.4. Build & Deployment
+
+    Tooling (Vite/Webpack), CI/CD pipeline
+
+    Hosting (static site, Node.js server, cloud)
+
+7. Roadmap & Milestones
+
+7.1. MVP Scope
+
+    Core loops: map navigation, questing, simple combat
+
+    Persistence, single-player only
+    7.2. Post-MVP
+
+    Advanced combat, crafting, diplomacy systems
+
+    Multiplayer/guilds, mod support
+    7.3. Stretch Goals
+
+    Procedural quests (AI Dungeon style)
+
+    God-mode map editor, community campaigns
+
+    Achievements, leaderboards, events

@@ -1,0 +1,754 @@
+Bernard Marais sent the proposal
+1:32 AM
+
+Hi, my name is Bernard
+
+
+I am about to go play the games to see what they are like. I can imagine what you want by your description.
+
+
+This sounds like a fun project.
+View details
+Timothy Short 1:32 AM
+
+Hey,
+
+
+Did you go and check the game out?
+Bernard Marais 9:17 PM
+
+I played a different one because I could for the life of me not find the sign up...
+Timothy Short 9:31 PM
+
+That's fine, Bernard. The game that you'd be playing is different to the altered version I want made.
+
+
+I have the code for the base game, the one you played I think (http://dragonprimelogd.net/home.php?)
+
+
+However, I need the core files edited so that the game is... different.
+
+and modules created for the extra content that I want added to the game.
+
+
+The code works on a module-basis, so different aspects are easily added on (however, I am no coder, so I don't know if my changes will require stuff to be matched together in different areas of code and whatnot)
+Bernard Marais 9:33 PM
+
+Ok - may I look at the code
+
+and how do i get an account to play?
+Timothy Short 9:35 PM
+
+Yes, sure thing. Ill attach the core code for you, and then I'll attach examples of modules - both of which I just this second downloaded from the official site.
+2 files
+lotgd-1.1.2_Dragonprime_Edition.tar.gz
+2 MB
+core-modules-lotgd-1.1.2_Dragonprime_Edition.tar.gz
+3 MB
+
+http://dragonprimelogd.net/create.php will take you to the character creation screen.
+
+
+The options to do stuff are found along the left and right hand sides of the browser window!
+Bernard Marais 9:38 PM
+
+Thank you - I will let you know if I will be able to work on the code after I have inspected it...
+Timothy Short 9:39 PM
+
+OK, thanks Bernard. Look forward to hearing from you 🙂
+Bernard Marais 9:47 PM
+
+Have you loaded this version on a server to play yet? I tried to make a new account but I think the server might be down.
+Timothy Short 9:50 PM
+
+I haven't - I'll pay for a server when the game is ready of course but the problem is, free hosts block me when I try and load it on to their server...
+
+tell you what, here's a new link
+
+http://darkkingdom.rpglink.in
+Dark Kingdom RPG
+Bernard Marais 9:51 PM
+
+hmm. I have a server. I think we should first make sure it is working.
+Timothy Short 9:51 PM
+
+Compared to the default one (the one in the code I gave you) this is modified a bit
+Bernard Marais 9:52 PM
+
+I see, it looks nicer
+
+Should I try install the game on my server?
+Timothy Short 9:53 PM
+
+Ok, do you want me to install it on there or do you know what to do? I could give you a link to install instructions.
+
+
+Yeah, here is what I want my homepage to look like (give or take, as an example for you to see how 'different' I want it,)
+
+http://dragonprime.net/index.php?page=installation - here are some basic instructions if you want to do it and dont know how (I sure as hell didn't before reading that lol)
+How to Install LoGD
+How to Install LoGD
+CKBBG.PNG
+CKBBG.PNG
+Bernard Marais 9:58 PM
+
+rofl. Having a good time reading the instructions. I will take my time and load it up. Will let you know how it goes
+Timothy Short 10:01 PM
+
+If you can enjoy that guys passive aggressive instructions you can enjoy anything!
+Awesome.
+
+
+Do you like text-based browser games, such as this?
+Bernard Marais 10:09 PM
+
+I am not against them. I just havent played one in a while. I remember them from when I was a kid playing on an old spectrum. I think I still have the book for one of them somewhere in my box of old crap. You had to type the whole game out yourself before you could play. And if you made 1 typo it broke
+Timothy Short 10:15 PM
+
+Dude. That is old. Like, old. Typing the game out yourself? That's not a pleasure I've had haha!
+Is that how you got into coding?
+
+
+Yep, that is fair, I haven't touched on many browser games since that one (crusader knights screenshot) shut down in 2010 - nothing really filled my cup after it.
+
+
+If you can edit the code and we can get this up and running, you may even enjoy it and decide to play it! As you saw in my post, it's going to have more content than these standard game servers.
+
+
+I've got someone who will be designing walls / bridges / a tile-map / castles etc. as well, ready to be put onto a huge map! I'm very excited to just play it lol.
+Bernard Marais 10:23 PM
+
+I suppose you are right. That was the first coding I ever did...
+Sounds good - I have read everything. I will attempt the install after lunch. I just want to study it a bit so I know how the system works. I see he mentions adding your own modules so there must be a recommended way of doing that...
+Timothy Short 10:51 PM
+
+I've been browsing their forum - I think there is a module manager in the settings somewhere, once the game is installed.
+
+
+Jee, I've always wanted to code (I would have been able to do all of this myself) but never been able to learn the language.
+Monday, Sep 03, 2018
+Bernard Marais 2:29 AM
+
+Ok - so far I can tell you this - The code itself is very old +- 10 years. I put it on my server, it failed. I made a xamp server on my PC and loaded it. It also failed. Turns out it will only work on an older php version < 5.3
+
+This is not good
+Timothy Short 2:33 AM
+
+I see, what are the options from here?
+Bernard Marais 2:37 AM
+
+I am not sure - should I try load an older version of php
+Timothy Short 3:04 AM
+
+Maybe, I'm not really sure on the differences??
+Bernard Marais 3:05 AM
+
+I am downloading the easyphp they recommend - but even that might be too new. I will see what I can do, will keep you posted
+Timothy Short 3:06 AM
+
+I used that for it when i tried, it connects to the database
+Bernard Marais 5:08 AM
+
+the download keeps failing. sooo slow. Would it be possible for you to download it and share it with me.?
+
+http://www.easyphp.org/save-easyphp-webserver-latest.php?d=direct
+Download e-webserver | e-webserver 14.1 beta 2 : Apache 2.4.10 | MySQL 5.6.19 | PHP 5.4.31 | PhpMyAdmin 4.2.6. Dedicated server for website hosting.
+Download Web hosting with e-webserver 14.1 beta 2. EasyPHP Webserver turns your computer into an easy-to-use personal web hosting server. You can host whatever you want directly on your computer and share it with everyone on internet like any website.
+
+Hold on - I think that might be the wrong php version
+
+but lets try it
+Timothy Short 5:15 AM
+
+Yeah I think it is
+
+I downloaded it but won't let me share as it's an EXE file - Upwork put a block on it
+
+http://www.easyphp.org/save-easyphp-devserver-latest.php
+Download | EasyPHP Devserver 17.0 : PHP 7.x / 5.5.x / 5.4.x / 5.3.x | Apache | Nginx | MySQL | PhpMyAdmin | Xdebug
+Download EasyPHP Devserver 17.0. You just need to download EasyPHP Devserver and run the setup. It will install a ready-to-use WAMP environment for PHP development.
+Bernard Marais 5:51 AM
+
+hmm
+
+I am trying again from my side
+Timothy Short 6:02 AM
+
+I almost had it up in my PC - I hit a snag and stopped, it wouldnt display the continue button from stage 3 - did you get past that stage?
+Bernard Marais 6:17 AM
+
+it fails every time I try download it
+Timothy Short 6:25 AM
+
+You removed this message
+
+To download what
+Bernard Marais 6:26 AM
+
+I got it finaly
+
+just finished
+
+easyphp
+Timothy Short 6:27 AM
+
+Oh brilliant, weird that it wasn't downloading for you
+Timothy Short 6:56 AM
+
+Bernard, I know some people are working on upgrading the code to modernise it and I think they've been doing it in their spare time for two years. I know its unfinished and whatnot, but I figured it may be useful for you to see or something.
+
+
+https://github.com/lotgd/core
+lotgd/core
+Core functionality for Legend of the Green Dragon, a text-based RPG game. - lotgd/core
+GitHub
+Bernard Marais 7:00 AM
+
+kewl - i will check it out
+Timothy Short 7:11 AM
+
+Sweet, hope you got the game up and running too. Seems that's the biggest hurdle people have, once its up everything else is, easier... lol
+Bernard Marais 10:12 AM
+
+ok - wow hard work... I got all the modules loaded and database working and all that. Now I am getting no errors, but when I try log in it says my account is not valid. Any ideas...?
+Timothy Short 9:30 PM
+
+you need to create a new character on there, unless you did that already? let me look
+Bernard Marais 9:31 PM
+
+I am talking about the one I loaded on the my server at home - It does not seem to be saving the accounts.
+Timothy Short 9:33 PM
+
+whats the link to the game?
+Bernard Marais 9:34 PM
+
+It is local
+Timothy Short 9:34 PM
+
+of course, newbie here lol um
+Bernard Marais 9:34 PM
+
+I will have to do some seriuos work to get it on my server online.
+
+I had to downgrade to sql. 5
+
+the database was giving errors until I did that. Everything seems to be correct up until I try login.
+Timothy Short 9:40 PM
+
+looked through a post someone else made about it
+
+"Well it was strict mode! Huge thanks to White Night and everyone else who contributed!"
+Bernard Marais 9:41 PM
+
+ok - I will change it - I think I will have to redo the database
+Timothy Short 9:41 PM
+
+apparently the SQL might be in 'strict mode' and its causing an error in communication
+Bernard Marais 9:43 PM
+
+Maybe I can just change the permissions - I will give it a bash and let you knwo
+Timothy Short 9:43 PM
+
+I think the game does the database automatically, so long as its connected to your account and you give the database a name in the installation
+
+
+okay bud
+Bernard Marais 9:46 PM
+
+It does populate automatically, but you need to create a sql database first. Unfortunate for me that easyphp does not work with my setup. Only after installing many old sql versions and servers for the php did I get a working combo. This is all because it is so old.
+Bernard Marais 9:56 PM
+
+OMG, it worked - nice 1. now I can finally play the game.
+
+Farmboy bernz!
+Timothy Short 10:23 PM
+
+Farmboy Bernz ahaha, it's like the game assigns you a rank within the peasantry!
+
+
+Awesome, its pretty **** that it needs to be done on olsd software, but now you've got it up everything else should be smooth sailing 😮
+
+hunt dose dragons bernz!
+Tuesday, Sep 04, 2018
+Bernard Marais 12:05 AM
+
+105.184.106.33:666
+
+I made my local server live
+
+username: AdminABC
+
+password: AdminABC1
+Timothy Short 12:10 AM
+
+The page wont load, saying it's taking too long
+Bernard Marais 12:11 AM
+
+hmmm - my internet in south africa... - Let me close some tabs
+Timothy Short 12:12 AM
+
+That sounds... painful... I'm running 60mbps, couldnt do with it being much slower than that
+Bernard Marais 12:12 AM
+
+its just for demo - no way you could host in south africa
+
+try again
+
+My live server is a siteground server (in europe)
+Timothy Short 12:13 AM
+Capture.PNG
+Capture.PNG
+
+this is what's coming up
+
+is there a different address I can use to access it or is the IP (looks IP) the only way?
+Bernard Marais 12:15 AM
+
+let me try
+
+http://105.184.106.33:665/
+Legend of the Green Dragon
+
+it works on my cellphone...
+Timothy Short 12:19 AM
+
+got it
+Bernard Marais 12:20 AM
+
+it seems ok on my side - is it working now?
+Timothy Short 12:20 AM
+
+yep, all's good 🙂 logged in etc
+Timothy Short 1:12 AM
+
+just checking, are you reinstalling the game?
+Bernard Marais 1:12 AM
+
+yes, sry - were u playing
+Timothy Short 1:12 AM
+
+Yeah, no deal man, was just checking I didnt screw it up lol
+Bernard Marais 1:14 AM
+
+🙂
+Bernard Marais 1:44 AM
+
+it is working now
+
+so as a superuser you can manage the modules - go check it out - there are setting and more there
+
+At the healer hut it cost me 0 to heal - that might need to be set up
+Timothy Short 1:56 AM
+
+where do we go from here? In terms of changing the game?
+Bernard Marais 1:57 AM
+
+Good question - I am playing it now just to get the hang of it - I suppose lets start with a small challenge to see how I would go about it. Is there documentation for the custom module building?
+Timothy Short 1:59 AM
+
+yep - let me link you
+
+also, might be worth getting yourself some gold and gems from the superuser area so you can test everything
+
+an awful lot of instructions, thinking you can skip some of this but here it is: http://dragonprime.net/index.php?page=saucymod
+Saucy's Module Tutorial
+Saucy's Module Tutorial
+
+sorry, thats not what im after - ill find a template for you now one second
+
+https://github.com/lotgd/module-project
+lotgd/module-project
+A template for a new LotGD module. Start with this code to make your own module. - lotgd/module-project
+GitHub
+Bernard Marais 2:13 AM
+
+ok - so let me try add a basic module then
+Timothy Short 2:21 AM
+
+hm
+
+to install a module, do you need to reinstall the game? I'm looking and I can only find 'uninstalled' and currently active ones in the superuser area
+Bernard Marais 2:22 AM
+
+I assume when I put it in the folder it will ask me to install it.... not sure - also, is the template for the version I am using?
+Timothy Short 2:24 AM
+
+The code for the game is the latest official code, the template I believe would be, as its fresh as of two years ago, compatible :0 I can check through, maybe it will say one sec!
+
+https://github.com/lotgd/core/commit/f687db80d702574dddffddf7c1f3906ecd2d8cef
+Moving parts of the README to the wiki · lotgd/core@f687db8
+Core functionality for Legend of the Green Dragon, a text-based RPG game. - lotgd/core
+GitHub
+
+have a read of that, I'm not sure i understand it 100% due to the technicalities but i think you'll know what it's about lol
+Timothy Short 2:37 AM
+
+Also bought the CrusaderKingdoms.net domain recently
+Bernard Marais 2:40 AM
+
+nice
+Bernard Marais 2:46 AM
+
+Ok - I have copies the findgem module and made a findgem module2 (Bernie gem) - now I need to go to the forest and find one...
+
+copied..
+
+oh kewl - as superuser I can just click on the trigger
+
+50 gems at a time 🙂
+Timothy Short 3:13 AM
+
+cool, your first module xD
+Bernard Marais 3:19 AM
+
+well - Not from scratch - but yeah - So what modules would you like added?
+Timothy Short 3:20 AM
+
+you mean the existing ones to try things out?
+Bernard Marais 3:21 AM
+
+well that 2 I suppose - I added all the ones in the core. I meant what kind of module do you want to make new
+Timothy Short 3:23 AM
+
+oh I see, well...
+
+a world map, independent of the travel system built into the game. I want it to be huge, not sure if you need to set dimensions but 500x500 i think was quite large?
+
+
+I'll be sorting the tiles out for that (gotta get them on there somehow? maybe if the map is made and used as an image and then the actual map module uses a 64x64 grid?
+
+on the map (same / separate module???) I want to be able to place castles and armies & for them to move around by the kingdom (currently clan)
+Bernard Marais 3:30 AM
+
+ok - are there any modules that use images currently?
+Timothy Short 3:31 AM
+
+yes, theres a map module but its different to what Im after, it uses images though so ill go look for that one second
+Bernard Marais 3:31 AM
+
+kewl 🙂
+Timothy Short 3:32 AM
+
+oh hold up - im looking at something, i think a modder made on in 2010 - let me look at this quickly
+Timothy Short 3:39 AM
+
+nope, seems he didnt publish it, the tosser
+
+lol
+Bernard Marais 3:44 AM
+
+lol
+Timothy Short 3:45 AM
+
+a LOT of modules here https://github.com/CavemanJoe/Improbable-Island---DragonScales---DragonBones---LotGD-2.0---Season-Three/tree/master/modules
+
+
+THIS LINK ----> Is for a map:
+https://github.com/CavemanJoe/Improbable-Island---DragonScales---DragonBones---LotGD-2.0---Season-Three/tree/master/modules/worldmapen
+CavemanJoe/Improbable-Island---DragonScales---DragonBones---LotGD-2.0---Season-Three
+Contribute to CavemanJoe/Improbable-Island---DragonScales---DragonBones---LotGD-2.0---Season-Three development by creating an account on GitHub.
+GitHub
+CavemanJoe/Improbable-Island---DragonScales---DragonBones---LotGD-2.0---Season-Three
+Contribute to CavemanJoe/Improbable-Island---DragonScales---DragonBones---LotGD-2.0---Season-Three development by creating an account on GitHub.
+GitHub
+
+Thinking, if you add it on, we can see what it is and then work out how to edit? idk though
+Timothy Short 3:58 AM
+
+Logged into this xD
+Capture.PNG
+Capture.PNG
+
+oh darn, was you logged in and in the forest? lmao, sorry dude
+
+OOOO i found something!!! That guys mod, he said on it that its not ready to be put on a live server but here it is with screenshots as well
+newvill.zip
+newvill.zip
+49 kB
+Bernard Marais 4:04 AM
+
+its ok - kewl -let take a looksie
+
+ok - I see, now he says he turned the village into a map - what part do you want to be a map?
+Timothy Short 4:09 AM
+
+Right now, not the village. In fact, the map is the world beyond the village.
+
+
+Imagine the villages and towns are in the wilderness and the map (the main map) is the world where civilisation is (kingdoms etc.)
+
+I can see how having the villages and towns as maps would be awesome but right now not a goal, the map would be separate from the villages etc
+Bernard Marais 4:12 AM
+
+ok - for example now - when I start the game - there should be a map - but it is now Degolburg Square??
+Timothy Short 4:15 AM
+
+nope, not when you start - you'd have to click a link like 'world map' or something
+Bernard Marais 4:15 AM
+
+ok
+
+So it wont be used as navigation
+Timothy Short 4:16 AM
+
+not for the player - but, what im thinking is, the player can navigate there from the forest and once they do their character goes to the world map and they lose access to the wilderness towns etc?
+
+wilderness towns being the normal ones now - on the world map they can travel to certain towns and stuff that are there but unless they get into a town they remain on the world map like armies, and can be killed by other players and / or their armies
+
+if that makes sense?
+Bernard Marais 4:19 AM
+
+ok - it makes sense yes. It sounds like we will have to build quite a bit..... So the pvp aspect must happen also there.
+
+We will have to make a custom theme - So we can add a custom button
+Timothy Short 4:20 AM
+
+i think the normal one is ok too, but its an added danger of leaving yourself on the world map without an army (as a lone lord on the world map)
+
+so if we have both, it gives players more options / dangers / content
+
+doesnt the module add a button?
+Bernard Marais 4:21 AM
+
+Do you mean like the other module - text in the sidebar
+
+I would have to add a new area. Currently you are either in town or in the forest
+Timothy Short 4:34 AM
+
+right
+
+
+what would be easier -
+
+
+Do the village map and the overlays so that people can walk around in there / access the stores / leave for the forest / the world map
+
+
+OR
+
+
+Leave that until we decide whether to do it or not (the village map) and go ahead with creating the world map like that?
+
+
+---- OOOOHHH i understand what you mean, yeh... well, we would need players to get there somehow (presumably in the text sidebar, it just depends where players have to be to get access to it)
+Would it be possible to use the code from players moving from village to forest/village and rework it to move them to the world map?
+Bernard Marais 4:40 AM
+
+I will attempt it - the forest and village are not modules (They are core). Also before I start - We have agreed upon 50 bucks for the work. I don't want to charge you a ton of cash to get this done, but I will have to ask for something for my time. So lets do it in stages. Like stage 1 would be to make a new module that is a separate map that link from the forest and the town. Step 2 is integrating its further functionality etc Are you happy with that system?
+Bernard Marais 6:06 PM
+
+Let me know what you think. Also I have started with the map...
+Wednesday, Sep 12, 2018
+Bernard Marais 11:45 PM
+
+Hi Timothy - Is everything ok?
+Tuesday, Jan 19, 2021
+Timothy Short 4:44 AM
+
+hi Bernard, apologises for wasting your time and dropping off the radar. I am looking to get this project back up and running (better times) so if you are still interested, ill give you a message in a couple of months and we can discuss it properly
+Thursday, Feb 04, 2021
+Bernard Marais 5:26 PM
+
+Ok - apology accepted
+Sunday, Apr 02, 2023
+Timothy Short 5:33 PM
+
+Hello Bernard, I’m in a position to discuss this financially with you now. Are you still interested in taking on the task?
+
+Please don’t feel like I’m wasting time or not going to reply either, you understood the concept and I’m finally back on my feet so am eager to get this game underway!
+Bernard Marais 7:29 PM
+
+Yes - I am still very interested. All good, I understand
+Bernard Marais 7:46 PM
+
+Sorry I was having a coffee. I am here today to chat if you want, just give me a time and I will be here
+Timothy Short 9:34 PM
+
+I’m in Australia at the moment and working during the nights so it’s a bit difficult, my replies will be slow but ongoing
+
+
+So what do we need to do to get the ball rolling on this my friend?
+Bernard Marais 9:34 PM
+
+We don't need much to get going - i would suggest 1 meeting with the 3 of us and we start afterwards.
+Bernard Marais 10:04 PM
+
+We can do one tomorrow - I will get everyone together and you make a time
+Timothy Short 10:14 PM
+
+There’s a third person sorry? I may have forgotten
+Bernard Marais 10:32 PM
+
+Yes, the artist Sean, me and the game mechanics guy, Dylan
+
+Never mind - I had you confused with another project
+
+No wonder you dont know what I am talking about, my bad
+
+This was 2018 good lord
+
+I only just clicked
+
+I have been waiting on a project to start from someone else. So sorry.
+Timothy Short 11:32 PM
+
+hahah no worries, let me know when you get a chance please!:) if you are still interested in this project 🙂
+Monday, Apr 03, 2023
+Bernard Marais 12:03 AM
+
+Give me tonight to think about it again - what kind of a budget do you have? How much did we want to redo again, i remember it was old back then and hosting was a problem. Do you want to rather recreate the game?
+Timothy Short 12:47 AM
+
+Budget wise, it depends, I am uncertain how much to expect this to cost so I’d spitball roughly £2000 or something?
+Yeah it was old and an issue, recreating it would probably be the best option in this case
+Timothy Short 8:02 AM
+
+I’m having a logo designed now which could help set the visual tone of the game too
+Wednesday, Apr 05, 2023
+Timothy Short 2:36 PM
+
+Hey Bernard, have you had a think on this?
+Bernard Marais 5:40 PM
+
+Yes - I have, I rate we should have a chat today.
+Friday, Apr 07, 2023
+Timothy Short 2:47 AM
+
+Bernard, I’m in Australia at the moment. Sydney time. I do have a few days off now, so am available to talk! Wasn’t free when you sent that message sorry
+
+
+
+
+
+
+
+Timothy Short 4:24 PM
+
+Hi Artem
+Hi mate, i want to get a browser game put together which is ‘minimal’ graphics and doesn’t have all the frustrating mechanics of new mobile games etc these days have.
+
+
+I would say it’s a mix between a text based browser game and something that they’ve done with Orna the mobile game.
+Artem Churyukin 4:32 PM
+
+Hi Timothy!
+
+
+Yeah, I agree, most of the current games (both mobile & desktop, but mostly mobile) set as a goal not the gameplay and roleplay, but the mindless clicking and repeating of all actions over and over again.
+
+
+A mix of text-based browser game seems very interesting to me, because I spent a lot of time in my youth in MUD games (text-based pre-MMOs) and I'm a writer myself (I wrote several Sci-Fi novels), and worked on several interactive story projects here, on UpWork.
+
+
+To my shame, I haven't heard about the Orna before you, but I downloaded it and will play to see what it is.
+Timothy Short 4:40 PM
+
+Exactly, orna is in some sense similar to that but i find it easier and less repetitive to play.
+
+
+I used to play a game called crusader knights back in 2009-2012 or so, was a brilliant browser game. I’ll link you the Reddit stream i posted about it a few years ago for you to have slightly more insight into what I’m on about. Where orna has you moving around the map based on your own movement this game would let you access the ‘kingdom map’ (if in or ruler of a kingdom) and move armies across the square based grid map to block off key points and resources. You didn’t claim land like a map painter, but had territory based on where you could defend and hold on to resources etc. but the game revolved around you as an individual (level up, unlock new ranks etc i believe) battling in the arena and tavern and sending your mercenaries out to find resources and stuff. It’s been a long time but that’s roughly what i recall!
+
+
+Interesting, what books? 😃 and do you have audiobook versions, i tend to stick to audio’s due to working so much haha.
+
+https://www.reddit.com/r/rpg_gamers/comments/9aqws7/crusader_knights_text_based_browser_game_help/
+
+This has an already written idea of what I’m thinking
+;
+
+
+https://www.reddit.com/r/rpg_gamers/comments/9bm6c4/creation_of_a_medieval_fantasy_game_using_lotgd/
+Artem Churyukin 4:48 PM
+
+Don't you mind if I check your links during the weekend as well? It's almost 6 am in my place, and even being an night person, I was just finishing the TV serial and going to go to bed whey you wrote 🙂
+Timothy Short Jan 27, 2024 | 4:40 PM
+
+Exactly, orna is in some sense similar to that but i find it easier and less repetitive to play.
+
+
+I used to play a game called crusader knights back in 2009-2012 or so, was a brilliant browser game. I’ll link you the Reddit stream i posted about it a few years ago for you to have slightly more insight into what I’m on about. Where orna has you moving around the map based on your own movement this game would let you access the ‘kingdom map’ (if in or ruler of a kingdom) and move armies across the square based grid map to block off key points and resources. You didn’t claim land like a map painter, but had territory based on where you could defend and hold on to resources etc. but the game revolved around you as an individual (level up, unlock new ranks etc i believe) battling in the arena and tavern and sending your mercenaries out to find resources and stuff. It’s been a long time but that’s roughly what i recall!
+
+
+Interesting, what books? 😃 and do you have audiobook versions, i tend to stick to audio’s due to working so much haha.
+
+I don't remember Crusaders Knights from that time, I remember the desktop game called "Crusader Kings", and I remember browser visual game with knights, don't remember the exact name, but it was just-another-browser-game-from-Gameforge, similar to Ogame and all Gameforge games
+Timothy Short 4:55 PM
+
+Not a problem mate, there’s no rush, just get back to me when you have time!
+Artem Churyukin 4:58 PM
+
+    Interesting, what books? 😃 and do you have audiobook versions, i tend to stick to audio’s due to working so much haha.
+
+Hah, sorry, but I'm originally Russian (moved from Russia in 2022 for obvious reasons) and the books are also in Russian for now, so I'm afraid there aren't even text versions in English, not to say about audio. Books are a fantasy about Putin starting World War 3 back in 2008, and the action took place in 2024 (well, when I wrote it back in 2018, it was a future, lol, never expected to really predict it) with the ex-military guy starting to work as a detective and finds out a conspiracy, revealing which leads to the revolution in Russia. Most probably I'll get a sentence now for writing something like that (back in Russia), but, well, I already wrote it.
+Artem Churyukin 5:04 PM
+
+Funny, it's actually being sold on UK's Amazon: https://www.amazon.co.uk/%D0%90%D1%80%D1%85%D0%B8%D0%B2-Russian-%D0%A7%D1%83%D1%80%D1%8E%D0%BA%D0%B8%D0%BD-%D0%90%D1%80%D1%82%D0%B5%D0%BC-ebook/dp/B08BCLLDFR
+
+
+Probably the publisher decided to go global
+Amazon.co.uk
+Artem Churyukin 5:25 PM
+
+btw, the http://crusaderknights.com back in 2008-2011 was registered by someone called "John Dunmire" from Columbus, USA. The email was "john@dunmire.us", and the domain "http://dunmire.us" still seems to be working (no website there, but it's registered in 2003 and still prolonged, so the email should work), also here's the link to LinkedIn: https://www.linkedin.com/in/johndunmire/
+
+
+Have you tried this contact to obtain sources or any information about the game?
+HugeDomains.com
+Monday, Jan 29, 2024
+Artem Churyukin 1:38 PM
+
+Hi Timothy!
+
+
+Do you have some sort of the game design document?
+Monday, Feb 05, 2024
+Artem Churyukin 3:57 PM
+
+Hello Timothy!
+
+
+Haven't heard from you for a while
+Timothy Short 4:09 PM
+
+Hey artem
+sorry for taking so long to get back to you
+
+
+I have spoken to him and he is reluctant (will not) give me details, photos or even sell me the code. he wants to revive the game himself, possibly, when he retires in a decades time. unfortunately that means i have zero content from the actual game to show you, its quite sad really, but its his choice. he's held on to it for two decades now without doing anything so its a shame he doesnt want to have the game brought back
+
+but its legit awesome you found him for me to try that route!!!
+Tuesday, Feb 06, 2024
+Artem Churyukin 8:29 AM
+
+Hi Timothy!
+
+
+No problem. I'm glad my info helped locate the original developer, but I'm sad about his position.
+
+
+Regarding the game development, I'm not sure what do you expect from me now and what you have in mind in terms of development. I checked the sources of the original LotGD (http://lotgd.net/), and most of them are about 20 years old and written in PHP. I was working with PHP a long time ago (probably about 10 years), and the code there is primitive, so I think I can handle it (even though no one writes this way nowadays), but it's still old and there's a lot of it (54000+ lines). So, I don't know, what do you have in mind?
+Legend of the Green Dragon
+Wednesday, Feb 07, 2024
+Timothy Short 5:11 PM
+
+i still would like to proceed, i dont think itd be good to write it in the old language for modern browsers would it?
+
+
+ultimately, i dont have a fully fleshed out 'everything to do' plan for this game. just the broad idea of what it was and what i would like it to be.
+
+
+What do you need from me to start making this browser game? I have never done this before and as such am unfamiliar with how to go about it really!
+Saturday, Feb 10, 2024
+Artem Churyukin 8:32 AM
+
+    i dont think itd be good to write it in the old language for modern browsers would it?
+
+Well, browsers can process such an old code for now, but using such old code would mean that the game is obsolete from the beginning.
+
+    What do you need from me to start making this browser game?
+
+It would be wise (and mandatory, actually) to start creating a database or document, with descriptions of all game processes and mechanics. This document is called "game design document". I must say, that game creation without this document is a waste of time and money, so I strongly suggest start working on it. There are a couple of videos, explaining what is it and how to write it:
+
+
+https://www.youtube.com/watch?v=VO4FNf-Xc58
+https://www.youtube.com/watch?v=xUo0rL2c_LQ

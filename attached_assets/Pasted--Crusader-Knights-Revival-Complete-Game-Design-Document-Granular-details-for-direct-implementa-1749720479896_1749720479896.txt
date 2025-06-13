@@ -1,0 +1,291 @@
+# Crusader Knights Revival – Complete Game Design Document
+
+*(Granular details for direct implementation by programmers and game designers)*
+
+---
+
+## 1. Game Overview
+
+**1.1 Game Title & Pitch**
+
+* **Title**: Crusader Knights Revival
+* **Pitch**: A medieval strategy-RPG hybrid in a 100×100 tile realm—recruit companions, shape faction reputations, wage battles, found kingdoms, and craft emergent stories.
+
+**1.2 Genre & Tone**
+
+* **Genre**: Browser RPG / Strategy hybrid
+* **Tone**: Gritty medieval realism blended with heroic fantasy.
+
+**1.3 Target Audience**
+
+* Ages 16+ who enjoy strategic and narrative-driven browser games.
+* Fans of text-based RPGs (LoGD, Crusader Knights) and lightweight strategy titles.
+
+**1.4 Platform & Tech Stack**
+
+* **Client**: React + Redux for UI; HTML5 Canvas for map; Tailwind CSS.
+* **Server**: Node.js (Express) + WebSocket; MongoDB (JSON file fallback).
+* **Build**: Vite; Docker; CI/CD via GitHub Actions.
+* **Deployment**: Static client on CDN, server on Heroku/AWS.
+
+---
+
+## 2. Story & Setting
+
+**2.1 Lore Summary**
+Aethermoor fractured after the king’s death. Three powers vie for dominance:
+
+* **Kingdom of Valor** (order, chivalry)
+* **Bandit Clan** (chaos, opportunism)
+* **Dragon Cult** (arcane power)
+
+**2.2 Player Role & Motivation**
+You are Sir Timothy, a disgraced knight seeking honor and power through quests, diplomacy, and conquest.
+
+**2.3 Factions & NPC Orgs**
+
+* **Quest Givers**: ❓ icons on map offering tasks that adjust reputation.
+* **Mercenary Guild**: Hire and manage companions.
+* **Taverns**: Rumor hubs and social chat channels.
+
+**2.4 Key Locations**
+
+* **Degolburg Square**: Tutorial hub with shops and healer.
+* **Settlements & Inns**: Social zones with bulletin boards.
+* **World Map**: 100×100 grid with diverse biomes and resource nodes.
+
+**2.5 Narrative Flow**
+Chapters unlock based on territory control and reputation milestones, culminating in the Dragon War and the realm’s fate.
+
+---
+
+## 3. Data Models & Schemas
+
+### 3.1 Player (`players`)
+
+```json
+{
+  _id, username,
+  stats:{level,xp,health,maxHealth,gold},
+  position:{x,y},
+  reputation:{"Kingdom of Valor":Int,...},
+  activeQuests:[questId], completedQuests:[questId],
+  inventory:[{itemId,qty}], companions:[companionId],
+  discoveredTiles:[{x,y}],
+  kingdomId: ObjectId|null
+}
+```
+
+### 3.2 Entities (`entities`)
+
+```json
+{ _id, type:"army"|"camp"|"questGiver"|"resourceNode", faction, x,y,
+  patrolPath:[{x,y}], questsOffered:[questId], nodeType, lastHarvest }
+```
+
+### 3.3 Quests (`quests`)
+
+```json
+{ _id, name, description, giverEntityId, type, steps:[...],
+  rewards:{gold,xp,items}, repChanges:{faction:amount} }
+```
+
+### 3.4 Map Tiles (`mapTiles`)
+
+```json
+{ x,y, terrain, movementCost, entityIds:[...], discoveredBy:[playerId] }
+```
+
+### 3.5 Kingdoms (`kingdoms`)
+
+```json
+{ _id, name, rulerId, memberIds:[...], ranks:[{userId,rank}],
+  regions:[{x,y}], castles:[{x,y,level}], color }
+```
+
+### 3.6 Player-Generated Quests (`playerQuests`)
+
+```json
+{ _id, authorId, boardLocation, title, description,
+  requirements:{type,resourceId,amount|npcId}, reward:{gold,items},
+  status:"open"|"accepted"|"completed", acceptedBy:null }
+```
+
+---
+
+## 4. Backend API Endpoints
+
+**Auth & Session**
+
+* `POST /api/auth/login` → token (JWT)
+* JWT middleware sets `req.userId`
+
+**Player**
+
+* `GET /api/player` → Player doc
+* `POST /api/player/update` {statsDelta,position,...}
+
+**Map & Exploration**
+
+* `GET /api/map/tiles?x&y&radius` → mapTiles
+* `POST /api/map/explore` {x,y}
+
+**Movement**
+
+* `POST /api/move` {armyId,path\[]} → validate A\*, return ETA, update entity
+
+**Quests**
+
+* `GET /api/quests/available?pos` → quests from questGivers
+* `POST /api/quests/accept` {questId}
+* `POST /api/quests/complete` {questId,proofData}
+
+**Player-Generated Quests**
+
+* `GET /api/player-quests?location` → bulletin board
+* `POST /api/player-quests/create` {...}
+* `POST /api/player-quests/accept` {questId}
+* `POST /api/player-quests/complete` {questId}
+
+**Reputation & Diplomacy**
+
+* `POST /api/rep/change` {faction,amount}
+* `GET /api/diplomacy/status`
+* `POST /api/diplomacy/propose` {targetFaction,type}
+
+**Combat**
+
+* `POST /api/combat/start` {enemyEntityId,playerArmyId} → battleId
+* `GET /api/combat/events?battleId` → SSE wave logs
+* `POST /api/combat/action` {battleId,action}
+
+**Economy & Crafting**
+
+* `GET /api/shop/items`
+* `POST /api/shop/buy` {itemId,qty}
+* `POST /api/craft` {recipeId}
+
+**Kingdoms**
+
+* `POST /api/kingdoms/create` {name,color}
+* `GET /api/kingdoms`
+* `POST /api/kingdoms/join` {kingdomId}
+* `POST /api/kingdoms/assignRank` {kingdomId,userId,rank}
+* `POST /api/kingdoms/claim` {kingdomId,x,y}
+* `POST /api/kingdoms/buildCastle` {kingdomId,x,y}
+* `POST /api/kingdoms/giftSoldiers` {fromX,fromY,toUserId,count}
+
+**Chat**
+
+* WebSocket `/ws/chat` for channels `global`, `settlement:<id>`, `inn:<id>`
+* `GET /api/chat/history?channel`
+* WebSocket message `{channel,text,...}`
+
+---
+
+## 5. Frontend Architecture
+
+**State Management**: Redux slices: player, map, entities, quests, combat, chat, kingdoms, playerQuests
+
+**Component Tree**
+
+```
+App
+ ├─ HUD
+ │   ├─ StatsBar
+ │   └─ RepBar
+ ├─ NavTabs
+ ├─ Views
+ │   ├─ HomeView
+ │   ├─ MapView
+ │   │   ├─ CanvasMap
+ │   │   ├─ ChatPanel
+ │   │   ├─ KingdomOverlay
+ │   │   └─ EncounterModal
+ │   ├─ QuestView
+ │   ├─ PlayerQuestsView
+ │   ├─ InventoryView
+ │   ├─ CompanionsView
+ │   ├─ GuildView
+ │   ├─ TavernView
+ │   └─ CombatView
+ └─ Modals
+     ├─ QuestDetail
+     ├─ ShopModal
+     ├─ CraftingModal
+     ├─ KingdomPanel
+     └─ BuildCastleModal
+```
+
+**MapView Logic**
+
+* On mount: dispatch `fetchMapTiles(player.position, radius)`
+* Canvas draws `mapTiles` with `drawImage(tileImage, x*tileSize, y*tileSize)`
+* Camera centers on player; viewport dims 20×15 (640×480 px)
+* On click: determine entity under cursor or tile coords → dispatch appropriate action
+
+**ChatPanel**
+
+* Subscribes to `chat[channel]`, renders last 50 messages
+* Input dispatches WebSocket send; `onmessage` reduces to Redux
+
+**CombatView**
+
+* Displays log from `combat[battleId]`; listens SSE events via WebSocket
+* Action buttons dispatch `/combat/action`
+
+---
+
+## 6. Inter-System Data Flows
+
+1. **Movement & Fog**: MOVE → `/api/move` → update position → dispatch `updateMapTiles` → reveal new tiles → CanvasMap re-renders + possible `/api/encounter/check`.
+2. **Quest System**: CLICK questGiver → fetch quest details → accept → `/api/quests/accept` → update player.activeQuests + rep → QuestView updates.
+3. **Player-Generated Quests**: ENTER inn → fetch `/player-quests?location` → display list + post form → create → WebSocket broadcast → others update boards.
+4. **Combat**: collision detection → `/combat/start` → open CombatView → SSE wave events → update stats & log → on complete update player and entity removal.
+5. **Kingdom Actions**: join/claim/build/gift → API calls → update `kingdoms` slice → MapView and KingdomPanel reflect changes in real time via WebSocket broadcast.
+
+---
+
+## 7. Art & Audio Integration
+
+* **Tile Assets**: 32×32 px PNGs imported via Webpack, stored in `/public/images/`
+* **Sprites**: Atlased in `spritesheet.png`; CSS `background-position`
+* **AudioManager**: Web Audio API singleton with methods `playSound(id)` & `loopAmbient(region)`
+* **UI Theme**: Color tokens defined in Tailwind config; accessible via classes
+
+---
+
+## 8. Multiplayer & Social Systems
+
+### 8.1 Chat Channels
+
+* **Global**: world-wide messages
+* **Settlement**: when in a town (auto-subscribe)
+* **Inn**: when in an inn location
+
+### 8.2 Kingdom Membership & Ranks
+
+* Models & APIs for join, assignRank, giftSoldiers; UI gating by role
+
+### 8.3 Cross-Party Encounters
+
+* Poll `/api/encounter/check` after moves; open modal for friendly trade or combat; resolve via API
+
+### 8.4 Player Bulletin Boards
+
+* Data model `playerQuests`; CRUD APIs; UI in settlements/inns for posting/accepting/completing
+
+---
+
+## 9. Roadmap & Milestones
+
+| Phase    | Features                                                                                      | Est. (Days) |
+| -------- | --------------------------------------------------------------------------------------------- | ----------- |
+| MVP      | Map & Fog, Quests (system & player), Small Combat, Inventory, Basic Chat, Kingdom create/join | 20          |
+| Sprint 2 | Large Battle Sim, Crafting, Shop, Reps & Diplomacy UI, Bulletin Boards                        | 25          |
+| Sprint 3 | Advanced AI events, Multiplayer refinements, Ranks & Gifting, Encounter System                | 30          |
+| Stretch  | Mod tools, Procedural quests, Multiplayer arenas, Community events                            | Future      |
+
+---
+
+*This single document can be handed directly to development teams—covering everything from data schemas and API contracts to UI components, art pipelines, and user flows.*

@@ -1,0 +1,146 @@
+1. Project Overview
+
+Crusader Knights Revival is a medieval‐themed, browser‐based strategy/RPG hybrid. Players control a lone knight, recruit companions, complete quests for multiple factions, and maneuver armies on a tile‐based world map. Faction reputation, dynamic AI patrols, and turn-based mechanics give it depth beyond a simple text adventure.
+2. Core Features (✅ Complete)
+2.1 Player Character & UI
+
+    Stats panel: Health, Gold, Experience, Level
+
+    Reputation bar: Live read-out of standing with “Kingdom of Valor,” “Bandit Clan,” “Dragon Cult”
+
+    Navigation tabs: Home, Quests, Inventory, Companions
+
+2.2 Quests & Factions
+
+    Quest Givers on map (click “❓” icons) for each major faction
+
+    Quest acceptance/completion: Rewards gold/XP, adjusts multiple faction reputations per quest definition
+
+    Quest Log: Active vs. completed lists
+
+2.3 Companions System
+
+    Hire Squire/Archer at Mercenary Guild
+
+    Companion cards: Individual name, class, stats, background, wealth
+
+    Dedicated Companions tab
+
+2.4 World Map & Movement
+
+    10×10 grid with randomized terrain (plains, forest, hills, water)
+
+    Tile coloring & hover tooltips: Shows move cost and ETA when an army is selected
+
+    A* pathfinding: Calculates optimal route and minutes (seconds in prototype) countdown
+
+    On-screen countdown: Live seconds remaining during movement
+
+    AI Patrols: Armies on fixed waypoints that move every few seconds
+
+3. Areas Needing Work (⚙️ To Do)
+
+    Quest Chains & Dialogue
+
+        Branching dialogue for Quest Givers
+
+        Multi-step quest chains (e.g., “recover bandits’ loot” → “return to town” → “report back”)
+
+    Inventory Mechanics
+
+        Consumable items (potions: use, cooldown, effects)
+
+        Equipment (weapons/armor) with stat bonuses
+
+        Trading system or crafting
+
+    Companion Depth
+
+        Companion leveling/XP gain
+
+        Equipment and skills per companion
+
+        Morale or loyalty system
+
+    Combat System
+
+        Turn-based battles (player + companions vs. bandits/monsters)
+
+        Skill trees, special abilities, critical hits
+
+        UI for choosing attacks/defend/use item
+
+    Map Expansion
+
+        Larger map (20×20 or infinite with procedural generation)
+
+        Zoom & pan controls
+
+        Fog of war / exploration reveal
+
+        Resource locations with interactive harvesting
+
+    Faction & Diplomacy
+
+        Faction AI: dynamic alliances, wars, trade
+
+        Reputation thresholds unlocking faction perks
+
+        Diplomatic actions (bribes, treaties, raids)
+
+    Dynamic Events
+
+        Random encounters on map (bandits, merchants, wandering monsters)
+
+        Seasonal changes or day/night cycle
+
+        World events (sieges, plagues, invasions) that shift faction power
+
+    Persistent World & Save/Load
+
+        Server-side data persistence, player login system
+
+        Leaderboards or PvP arenas
+
+        Guild/clan creation for multiplayer
+
+    UI/UX Enhancements
+
+        Animated map movement, troop march visuals
+
+        Health bars, reputation gauges, quest progress trackers
+
+        Tooltip library for rich descriptions
+
+    Sound & Music
+
+        Background ambience (tavern chatter, battlefield)
+
+        Combat and UI sound effects
+
+        Thematic soundtrack
+
+4. Feature Ideas & Mechanics (🔮 Brainstorm)
+Category	Ideas
+Quests	Multi-stage “Rescue the Princess” chain, timed quests, faction-only quests, secret/hidden quests.
+Combat	Formation system, flanking bonuses, morale checks, siege warfare minigame.
+Factions	Faction capitals on map, special faction buildings, recruit unique faction units.
+Companions	Companion romances, betrayals, permadeath options, quest-specific companions.
+Economy	Dynamic pricing, supply/demand, trading caravans, resource scarcity events.
+Map Mechanics	Roads vs. rough terrain speed modifiers, river crossing, bridges, fortifications, garrisoning.
+Progression	Skill trees per class, prestige system (rebirth at higher difficulty), legendary titles.
+Social	Player messaging system, rivalry boards, PvP rankings, co-op raids.
+Customization	Hero appearance editor, kingdom name & banner creation, map editor mode.
+Random Events	Meteor showers granting magic items, revolts in captured territories, wandering legendary beasts.
+Meta-Features	Achievements, daily/weekly challenges, community-driven story events.
+Let’s Discuss Next Steps
+
+    Prioritize which systems (combat, economy, diplomacy) to build first.
+
+    Define detailed specs for quests, companion progression, and map size.
+
+    Storyboard user flows for key interactions (e.g., hiring, questing, battling).
+
+    Set up server persistence and asset pipelines (images, audio).
+
+I’m ready to start implementing whichever module you’d like to tackle next—just point me at the top priorities!

@@ -1,0 +1,385 @@
+1. Game Overview
+
+1.1 Title & Pitch
+
+Name: Crusader Knights Revival
+
+One-liner: A medieval strategy-RPG where you traverse a 100×100 tile world, juggle quests, reputation, and kingdom-building with emergent narrative.
+
+1.2 Architecture Summary
+
+Frontend: React + Redux for UI, Canvas for map, TailwindCSS for styling.
+
+Backend: Node.js (Express), REST API + WebSocket for real-time events.
+
+Data: MongoDB (collections: players, entities, quests, mapTiles). Development uses JSON file fallback.
+
+2. Data Models & Schemas
+
+2.1 Player Document (MongoDB players)
+
+{
+  _id: ObjectId,
+  username: String,
+  stats: {
+    level: Int,
+    xp: Int,
+    health: Int,
+    maxHealth: Int,
+    gold: Int
+  },
+  position: { x: Int, y: Int },
+  reputation: { "Kingdom of Valor": Int, "Bandit Clan": Int, "Dragon Cult": Int },
+  activeQuests: [ObjectId],
+  completedQuests: [ObjectId],
+  inventory: [ { itemId: ObjectId, qty: Int } ],
+  companions: [ObjectId],
+  discoveredTiles: [ { x: Int, y: Int } ]
+}
+
+2.2 Entity Document (entities)
+
+{
+  _id: ObjectId,
+  type: "army"|"camp"|"questGiver"|"resourceNode",
+  faction: String,
+  x: Int, y: Int,
+  patrolPath: [ { x: Int, y: Int } ],             // for armies
+  questsOffered: [ObjectId],                   // for questGivers
+  nodeType: "farm"|"mine"|null,              // for resourceNode
+  lastHarvestTimestamp: Date
+}
+
+2.3 Quest Document (quests)
+
+{
+  _id: ObjectId,
+  name: String,
+  description: String,
+  giverEntityId: ObjectId,
+  type: "fetch"|"kill"|"escort"|"multiStep",
+  steps: [ { description, required: {...}, npcId?, nextStep? } ],
+  rewards: { gold: Int, xp: Int, items: [ { itemId, qty } ] },
+  repChanges: { "Kingdom of Valor": Int, ... }
+}
+
+2.4 Map Tile Document (mapTiles)
+
+{
+  x: Int, y: Int,
+  terrain: "plains"|"forest"|"hills"|"water"|"desert"|"mountain",
+  movementCost: Int,
+  entityIds: [ObjectId],
+  isDiscoveredBy: [playerId],
+}
+
+3. Backend API
+
+3.1 Authentication & Session
+
+POST /api/auth/login { username, password } → { token }
+
+Middleware: JWT validate, attach req.userId.
+
+3.2 Player State
+
+GET /api/player → returns Player Document.
+
+POST /api/player/update { statsDelta, position, ... } → 200 OK.
+
+3.3 Map & Exploration
+
+GET /api/map/tiles?x=&y=&radius= → returns array of tiles around point.
+
+POST /api/map/explore { x, y } → add tile to discoveredTiles of player.
+
+3.4 Movement
+
+POST /api/move { armyId, path: [ {x,y}, ... ] }
+
+Validates path via A* on server, applies movement with timestamp delays.
+
+Returns estimated arrival eta.
+
+3.5 Quests
+
+GET /api/quests/available?playerPos=x,y → quests offered by nearby questGiver entities.
+
+POST /api/quests/accept { questId } → pushes quest to activeQuests, applies rep start.
+
+POST /api/quests/complete { questId, proofData } → validates, moves to completedQuests, issues rewards, applies rep changes.
+
+3.6 Reputation & Diplomacy
+
+POST /api/rep/change { faction, amount }
+
+POST /api/diplomacy/propose { targetFaction, type:"alliance"|"war" }
+
+GET /api/diplomacy/status → returns current relations matrix.
+
+3.7 Combat
+
+POST /api/combat/start { enemyEntityId, playerArmyId }
+
+Server computes skirmish or starts multi-wave sim, returns battleId & first log entries.
+
+GET /api/combat/events?battleId= → SSE stream of wave results.
+
+POST /api/combat/action { battleId, action:"flee" }
+
+3.8 Economy & Crafting
+
+GET /api/shop/items → list of purchasable items with dynamic prices (based on rep/supply).
+
+POST /api/shop/buy { itemId, qty }
+
+POST /api/craft { recipeId }
+
+Server deducts inputs, schedules craftingComplete event.
+
+3.9 Dynamic Events
+
+WebSocket /ws channel for server-pushed events: dragon sightings, seasonal change, festival start.
+
+4. Frontend Architecture
+
+4.1 State Management (Redux)
+
+Slices: player, map, entities, quests, combat, ui
+
+Actions: e.g. fetchMapTiles, acceptQuest, startCombat, moveArmy
+
+Middleware: redux-thunk for async API calls
+
+4.2 Components
+
+App
+ ├─ HUD (StatsBar, RepBar, Minimap)
+ ├─ NavTabs (Home, Map, Quests...)
+ ├─ HomeView
+ ├─ MapView
+ │   ├─ CanvasMap
+ │   └─ MapControls
+ ├─ QuestView
+ ├─ InventoryView
+ ├─ CompanionsView
+ ├─ CombatView
+ └─ Modals (QuestDetail, Shop, Dialog)
+
+4.3 MapView & CanvasMap
+
+Canvas: draw tiles via drawImage per mapTiles state
+
+Camera: tracks player position, renders viewport of 20×15
+
+Input: click to select entities or call dispatch(moveArmy(...))
+
+4.4 UI Integration
+
+On state changes (e.g. acceptQuest), show notification using react-toastify or custom component.
+
+Modal manager: single store slice controlling open/close state of dialogs.
+
+5. Inter-System Data Flows
+
+Map Exploration: Player moves → dispatch MOVE_ACTION → backend /api/move → update player.position & map.explored → MapView re-renders
+
+Quest Acceptance: click QuestGiver icon → open QuestDetail modal → click Accept → dispatch acceptQuest thunk → POST /api/quests/accept → update player.activeQuests & rep → HUD updates → new quests appear in QuestView
+
+Combat: click banditCamp → dispatch startCombat → POST /api/combat/start → open CombatView → listen to battle SSE /api/combat/events → append logs & update player.stats → on battle end dispatch completeCombat → update state.entities & refresh MapView
+
+Shop & Craft: open GuildView → dispatch fetchItems → GET /api/shop/items → render items → buy triggers dispatch buyItem → POST /api/shop/buy → update player.inventory & gold
+
+Diplomacy: open Diplomacy UI → actions dispatch proposeAlliance/declareWar → POST /api/diplomacy/propose → on success update factionsRelations slice → MapView overlays updated region control colors
+
+6. Art & Audio Implementation Notes
+
+Tiles: load via import snowUrl from './images/snow.png'; and assign to a Image object once.
+
+Spritesheet: use CSS background-position for UI elements.
+
+AudioManager: singleton handling AudioContext, with methods playSound(name) and loopAmbient(region).
+
+This exhaustive spec covers data models, API endpoints, frontend architecture, and event flows—enabling developers to implement the full game end to end.
+
+7. Multiplayer & Social Systems
+
+To support a living online realm, add real-time communication, dynamic kingdom formation, shared world state, and cross-party encounters.
+
+7.1 Chat & Social Interaction
+
+Data Model (chats collection)
+
+{
+  _id: ObjectId,
+  channel: String,        // 'global', 'settlement:<id>', 'inn:<id>'
+  messages: [
+    { userId: ObjectId, username: String, text: String, timestamp: Date }
+  ]
+}
+
+API Endpoints
+
+WebSocket /ws/chat – send/receive { channel, message }
+
+GET /api/chat/history?channel= – returns last 50 messages
+
+Frontend
+
+ChatPanel component subscribes to Redux slice chat[channel] and WebSocket events.
+
+Global Chat always visible; Settlement Chat when player enters a settlement; Inn Chat specific on entering an inn.
+
+Chat input dispatches WebSocket send; server broadcasts to subscribed clients.
+
+Data Flow
+
+Client mounts ChatPanel with channel='global'; fetch /api/chat/history → populate Redux.
+
+On send, ws.send({ channel, message }); server persists to chats and broadcasts to all in channel.
+
+Client receives broadcast onmessage → dispatch addMessage to Redux → UI updates.
+
+7.2 Kingdoms & Land Claiming
+
+Data Model (kingdoms collection)
+
+{
+  _id: ObjectId,
+  name: String,
+  rulerId: ObjectId,
+  memberIds: [ObjectId],
+  color: String,            // map overlay tint
+  regions: [ { x:Int, y:Int } ],
+  castles: [ { x:Int, y:Int, level:Int } ]
+}
+
+API
+
+POST /api/kingdoms/create { name, color } → new kingdom owned by userId
+
+POST /api/kingdoms/claim { kingdomId, x, y } → add tile to regions; only if adjacent and sufficient influence
+
+POST /api/kingdoms/buildCastle { kingdomId, x, y } → create or upgrade castle at tile; costs resources
+
+GET /api/kingdoms → list all kingdoms with member, region, castle data
+
+Frontend
+
+KingdomPanel: shows current kingdom info, members, resources, and build/claim buttons.
+
+MapView Overlay: tints tiles per regions, shows castle icons.
+
+Permissions: only ruler/member can issue claim/build; UI disables buttons otherwise.
+
+Flow
+
+Player joins or creates a kingdom → dispatch create/join API → update kingdoms slice → MapView renders overlay.
+
+Claim process: click eligible tile → dispatch claim API → on success update slice.
+
+Build castle: click on map → open BuildCastle modal → confirm cost → dispatch build API → update region state.
+
+7.3 Cross-Party Encounters
+
+Mechanic
+
+When two parties (player or AI-controlled armies/companions) occupy same or adjacent tile, trigger a Crusade Encounter.
+
+Encounters can be Friendly (ally greetings, trade) or Hostile (skirmish/combat or ambush).
+
+API
+
+POST /api/encounter/check { partyAIds, partyBIds } → returns encounter type and possible actions
+
+POST /api/encounter/action { encounterId, action } → resolves trade or combat subroutine
+
+Frontend
+
+EncounterModal: displays both parties’ summaries (names, strengths, reputations), action choices (greet/trade/attack/flee).
+
+Uses CombatView for hostile resolution, TradeView for friendly exchange.
+
+Flow
+
+After each player move, client polls /api/encounter/check for overlapping parties.
+
+If encounter, open EncounterModal; user picks action.
+
+Dispatch /api/encounter/action; server resolves, updates state (combat logs, inventory transfers), and broadcasts update via WebSocket.
+
+With these multiplayer facets—chat, dynamic kingdoms, and cross-party crusades—you’ll have a vibrant shared world that binds social interaction to the core mechanics.
+
+7.4 Kingdom Membership & Ranks
+
+Extend the kingdoms model and API so members can join, be ranked, and support each other:
+
+Data Model Updates (kingdoms collection):
+
+{
+  _id, name, rulerId, memberIds,
+  ranks: [ { userId:ObjectId, rank:String } ],   // e.g. "Lord", "Knight", "Vassal"
+  regions, castles, color
+}
+
+API Endpoints
+
+POST /api/kingdoms/join { kingdomId } → add req.userId to memberIds, assign default rank "Vassal".
+
+POST /api/kingdoms/assignRank { kingdomId, userId, rank } → ruler or high-rank officer only; updates ranks array.
+
+POST /api/kingdoms/giftSoldiers { fromCastleX, fromCastleY, toUserId, count } → check sender stationed at castle, decrement sender army, increment recipient's stationed count.
+
+Flow & Permission Checks
+
+Joining: Player clicks “Join Kingdom” in KingdomPanel → dispatch /api/kingdoms/join → on success update kingdoms slice.
+
+Assigning Ranks: Ruler views KingdomPanel → sees member list with “Assign Rank” dropdown → calls /assignRank → UI updates in real time.
+
+Gifting Soldiers: In CastleDetail modal, if userId has stationed troops there, “Gift Soldiers” input appears → server migrates troops between players and updates both states.
+
+7.5 Player Bulletin Boards & User-Generated Quests
+
+Enable players to post their own quests on town bulletin boards, adding a social-driven layer:
+
+Data Model (playerQuests collection):
+
+{
+  _id: ObjectId,
+  authorId: ObjectId,
+  boardLocation: "settlement:<id>"|"inn:<id>",
+  title: String,
+  description: String,
+  requirements: { type:"gather", resourceId:ObjectId, amount:Int }|{ type:"escort", npcId:ObjectId },
+  reward: { gold:Int, items:[{itemId,qty}] },
+  status: "open"|"accepted"|"completed",
+  acceptedBy: ObjectId|null
+}
+
+API Endpoints
+
+GET /api/player-quests?location= → list open quests at that board
+
+POST /api/player-quests/create { boardLocation, title, description, requirements, reward } → creates a new quest, visible to others
+
+POST /api/player-quests/accept { questId } → marks acceptedBy, moves to player’s activeQuests
+
+POST /api/player-quests/complete { questId, proofData } → validates (server checks inventory or event trigger), grants reward to accepter, marks status completed
+
+Client Integration
+
+BulletinBoardView: Visible when in settlement/inn; fetches /player-quests?location=; shows list with "Post New Quest" and "Accept" buttons.
+
+QuestPostModal: Form for title, description, pick requirement type, set reward; client-side validation; on submit calls create endpoint.
+
+QuestList: Active: includes player’s own posts and accepted ones; Completed: shows finished.
+
+Data Flow
+
+Player enters town → MapView triggers fetch for both system quests (from questGiver entities) and player-posted quests (bulletin board).
+
+Posting a quest → dispatch create → server writes to playerQuests, broadcasts via WebSocket to others in location.
+
+Accepting → marks quest with acceptedBy; only one player can accept; moves quest into their QuestView.
+
+Completion → validated by server, inventory checked, then reward granted and both author and accepter notified.
